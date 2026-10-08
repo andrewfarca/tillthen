@@ -1,0 +1,41 @@
+# Is Till Then up? Every 10 minutes GitHub checks the API and the website.
+# If either stops answering, it opens an issue in this repo, and GitHub
+# emails the owner. When it's back, the issue closes itself.
+name: uptime
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+permissions:
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check
+        id: check
+        run: |
+          down=""
+          for i in 1 2 3; do
+            down=""
+            curl -fsS -m 20 https://api.tillthenapp.com/api/health >/dev/null || down="$down API"
+            curl -fsS -m 20 -o /dev/null https://tillthenapp.com/ || down="$down website"
+            [ -z "$down" ] && break
+            sleep 30
+          done
+          echo "down=$down" >> "$GITHUB_OUTPUT"
+      - name: Open or close the alert
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DOWN: ${{ steps.check.outputs.down }}
+        run: |
+          open=$(gh issue list -R "$GITHUB_REPOSITORY" --label down --state open --json number -q '.[0].number')
+          if [ -n "$DOWN" ] && [ -z "$open" ]; then
+            gh label create down -R "$GITHUB_REPOSITORY" --color B60205 2>/dev/null || true
+            gh issue create -R "$GITHUB_REPOSITORY" --label down \
+              --title "Till Then is down:$DOWN" \
+              --body "Checked $(date -u) — not answering:$DOWN. Fix: ~/.fly/bin/flyctl status -a tillthen-api, then flyctl machines restart."
+          elif [ -z "$DOWN" ] && [ -n "$open" ]; then
+            gh issue close "$open" -R "$GITHUB_REPOSITORY" --comment "Back up at $(date -u)."
+          fi

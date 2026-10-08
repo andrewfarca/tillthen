@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#161616" />
+<title>Get Till Then 🔒</title>
+<!-- The one install link every invite carries. It points at TestFlight
+     during the beta and the App Store after launch: change INSTALL below and
+     republish the site; no app update needed. -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Till Then" />
+<meta property="og:title" content="Get Till Then 🔒" />
+<meta property="og:description" content="Lock in photos and videos with your friends. Nobody sees a thing until the day you pick." />
+<meta property="og:image" content="https://tillthenapp.com/og-join.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://tillthenapp.com/get/" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/icon-192.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; background:#161616; color:#fff; font:17px/1.5 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif; display:grid; place-items:center; padding:24px; text-align:center; }
+  .card { max-width:420px; }
+  h1 { font:800 34px/1.1 -apple-system, 'SF Pro Display', system-ui, sans-serif; letter-spacing:-.04em; margin:0 0 10px; }
+  p { color:rgba(255,255,255,.68); margin:0 0 28px; }
+  a.btn { display:block; background:#2FBF84; color:#0b1f17; font-weight:700; text-decoration:none; border-radius:999px; padding:15px 22px; margin:10px 0; }
+  a.quiet { display:block; color:rgba(255,255,255,.68); margin-top:18px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Get Till Then 🔒</h1>
+  <p>Lock in photos and videos with your friends. Nobody sees a thing until the day you pick.</p>
+  <a class="btn" id="get" href="https://testflight.apple.com/join/rRTBvHkE">Get the app</a>
+  <a class="quiet" href="/">What is Till Then?</a>
+</div>
+<script>
+  // Straight on to the install page on a phone; the button stays as a fallback.
+  var INSTALL = document.getElementById('get').href;
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) location.replace(INSTALL);
+</script>
+</body>
+</html>

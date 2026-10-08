@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#f5f1ea" />
+<link rel="icon" href="../icon-192.png" />
+<style>
+  :root { --bg:#f5f1ea; --ink:#161616; --muted:rgba(22,22,22,.62); --brand:#1e6b4e; --card:#fff; --line:rgba(22,22,22,.1); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 40px 20px 72px; }
+  header { display:flex; align-items:center; gap:12px; margin-bottom: 28px; }
+  header img { width:44px; height:44px; border-radius:11px; }
+  header b { color:var(--brand); font-size:22px; letter-spacing:-.03em; }
+  h1 { font-size:30px; letter-spacing:-.035em; line-height:1.15; margin:0 0 6px; }
+  .date { color:var(--muted); font-size:14px; margin:0 0 28px; }
+  h2 { font-size:19px; letter-spacing:-.02em; margin:32px 0 8px; }
+  p, li { color: rgba(22,22,22,.86); }
+  ul { padding-left: 20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin:16px 0; }
+  a { color: var(--brand); }
+  footer { margin-top: 40px; color: var(--muted); font-size: 14px; display:flex; gap:16px; flex-wrap:wrap; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; margin: 8px 0 4px; }
+  td, th { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; }
+  form { display: grid; gap: 14px; margin-top: 8px; }
+  label.f { display: grid; gap: 6px; font-weight: 600; font-size: 15px; }
+  label.f small { font-weight: 400; }
+  input[type=text], input[type=email], textarea { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: #fff; color: var(--ink); width: 100%; }
+  textarea { min-height: 130px; resize: vertical; }
+  .kinds { display: grid; gap: 8px; }
+  .kinds label, .check { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; cursor: pointer; font-weight: 400; }
+  .kinds input, .check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--brand); flex: none; }
+  .kinds b { display: block; }
+  button { font: inherit; font-weight: 700; padding: 14px 18px; border-radius: 14px; border: 0; background: var(--brand); color: #fff; cursor: pointer; }
+  button[disabled] { opacity: .5; cursor: default; }
+  .err { color: #b03030; font-size: 14.5px; min-height: 1em; }
+  .done { border-color: rgba(30,107,78,.35); background: #f2faf6; }
+  .hide { display: none; }
+  .warn { border-color: rgba(176, 48, 48, .25); background: #fff7f6; }
+</style>
+<title>Safety and removal requests — Till Then</title>
+</head>
+<body><main>
+<header><img src="../icon-192.png" alt="" /><b>Till Then</b></header>
+<h1>Safety, removal and contact</h1>
+<p class="date">No account needed. We read every request.</p>
+
+<div class="card warn">
+  <b>In danger right now?</b> Call <b>911</b>.
+  Thinking about suicide or self-harm, or worried about a friend? Call or text <b>988</b> any time (US).
+  Child sexual exploitation can also be reported straight to NCMEC at <a href="https://report.cybertip.org">report.cybertip.org</a>,
+  and <a href="https://takeitdown.ncmec.org">Take It Down</a> helps remove intimate images of people under 18 from many apps at once.
+</div>
+
+<p>Use this form to ask us to remove an intimate image of you (or your child) that was shared without consent, to raise a child-safety concern, or for anything else — a copyright notice, a privacy or data request, a parent's request, an account you can't get into, or a request from law enforcement. If you have the app, you can also report anything from inside it (⋯ → Report).</p>
+
+<form id="f" novalidate>
+  <div class="kinds" role="radiogroup" aria-label="What is this about?">
+    <label><input type="radio" name="kind" value="intimate_image" /> <span><b>Remove an intimate image</b><small>A nude, sexual or intimate photo or video of me or my child, shared without consent. We act on valid requests within 48 hours, including identical copies.</small></span></label>
+    <label><input type="radio" name="kind" value="child_safety" /> <span><b>A child may be at risk</b><small>Grooming, exploitation, or a child in danger.</small></span></label>
+    <label><input type="radio" name="kind" value="other" /> <span><b>Something else</b><small>Copyright, privacy or data request, parent request, account access, law enforcement, or a question.</small></span></label>
+  </div>
+  <label class="f">Your name <small>Optional, except for a removal request.</small><input type="text" name="name" maxlength="120" autocomplete="name" /></label>
+  <label class="f">How we can reach you <small>Email or phone. We only use it to answer this request.</small><input type="text" name="contact" maxlength="200" required autocomplete="email" /></label>
+  <label class="f">Where is it? <small>The @username, the capsule's name, or anything that helps us find it.</small><input type="text" name="location" maxlength="500" /></label>
+  <label class="f">What's going on? <textarea name="details" maxlength="4000" required></textarea></label>
+  <div id="signing" class="hide">
+    <label class="f">Signature <small>Type your full name.</small><input type="text" name="signature" maxlength="120" autocomplete="name" /></label>
+    <label class="check"><input type="checkbox" name="goodFaith" /> <span>I'm the person shown (or their parent, guardian or authorised representative), the image was shared without consent, and the information in this request is accurate to the best of my knowledge.</span></label>
+  </div>
+  <div class="err" id="err" role="alert"></div>
+  <button type="submit" id="send">Send</button>
+</form>
+
+<div id="done" class="card done hide" role="status">
+  <b>Got it.</b> Your reference is <b id="ref"></b>. Keep it if you write to us again. We review requests within 24 hours, and act on intimate-image removals within 48.
+</div>
+
+<h2>What happens next</h2>
+<ul>
+  <li>A moderator reviews it — the same day for anything urgent.</li>
+  <li>If something breaks our <a href="../terms/">Community Rules</a>, we remove it — even from a capsule that hasn't opened yet — and may ban the account.</li>
+  <li>Apparent child sexual exploitation is reported to NCMEC, as US law requires.</li>
+  <li>We may contact you if we need more information.</li>
+</ul>
+
+<footer><a href="../terms/">Terms and Community Rules</a><a href="../privacy/">Privacy Policy</a></footer>
+</main>
+<script>
+(function () {
+  var CONFIG = 'https://gist.githubusercontent.com/andrewfarca/fe711e540957b8f2f488820b968b1536/raw/tillthen-api.json';
+  var FALLBACK = 'https://uninsured-onion-unlucky.ngrok-free.dev';
+  var form = document.getElementById('f');
+  var err = document.getElementById('err');
+  var send = document.getElementById('send');
+  var signing = document.getElementById('signing');
+  function kind() { var k = form.querySelector('input[name=kind]:checked'); return k ? k.value : ''; }
+  form.addEventListener('change', function () { signing.classList.toggle('hide', kind() !== 'intimate_image'); });
+  var start = location.hash.replace('#', '');
+  if (start) { var r = form.querySelector('input[name=kind][value="' + start + '"]'); if (r) { r.checked = true; signing.classList.toggle('hide', start !== 'intimate_image'); } }
+
+  // On GitHub Pages the API lives elsewhere; served by the app's own server, it's this one.
+  function apiBase() {
+    if (!/github\.io$/.test(location.hostname)) return Promise.resolve('');
+    return fetch(CONFIG + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { return (j && j.apiBase) ? String(j.apiBase).replace(/\/$/, '') : FALLBACK; })
+      .catch(function () { return FALLBACK; });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.textContent = '';
+    var d = new FormData(form);
+    var body = {
+      kind: kind(), name: (d.get('name') || '').trim() || undefined, contact: (d.get('contact') || '').trim(),
+      location: (d.get('location') || '').trim() || undefined, details: (d.get('details') || '').trim(),
+      signature: (d.get('signature') || '').trim() || undefined, goodFaith: !!d.get('goodFaith'),
+    };
+    if (!body.kind) { err.textContent = 'Choose what this is about.'; return; }
+    if (body.contact.length < 3) { err.textContent = 'Add an email or phone number so we can reply.'; return; }
+    if (body.details.length < 5) { err.textContent = 'Tell us a little about what’s going on.'; return; }
+    if (body.kind === 'intimate_image' && (!body.signature || !body.goodFaith)) { err.textContent = 'For a removal request, type your full name as a signature and tick the statement.'; return; }
+    send.disabled = true; send.textContent = 'Sending…';
+    apiBase().then(function (base) {
+      return fetch(base + '/api/public/safety', {
+        method: 'POST', headers: { 'content-type': 'application/json', 'ngrok-skip-browser-warning': '1' }, body: JSON.stringify(body),
+      });
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (j) {
+        if (!res.ok) throw new Error((j && j.error && j.error.message) || 'That didn’t send.');
+        document.getElementById('ref').textContent = j.reference;
+        form.classList.add('hide');
+        document.getElementById('done').classList.remove('hide');
+        window.scrollTo(0, 0);
+      });
+    }).catch(function (x) {
+      err.textContent = (x && x.message && x.message !== 'Failed to fetch') ? x.message : 'We couldn’t reach Till Then just now. Try again in a minute, or message @tillthenapp on Instagram.';
+    }).then(function () { send.disabled = false; send.textContent = 'Send'; });
+  });
+})();
+</script>
+</body></html>
